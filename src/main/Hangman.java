@@ -21,7 +21,6 @@ public class Hangman {
 
     }
 
-    // TODO: implement method inputChar
     public static char inputChar(String lineInput) {
         if (lineInput.length() != 1)
             throw new IllegalArgumentException("Input exactly 1 character");
