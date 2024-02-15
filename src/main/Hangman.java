@@ -2,7 +2,7 @@ package main;
 
 public class Hangman {
     private Word currentWord;
-    private int attemptsLeft;
+    private int attemptsLeft = 10;
 
     public Hangman() {
 
@@ -21,6 +21,11 @@ public class Hangman {
 
     }
 
+    // TODO: implement method inputChar
+    private char inputChar() {
+        return 'a';
+    }
+
     public void setWord(String newWord) {
         currentWord = new Word(newWord);
     }
@@ -31,5 +36,13 @@ public class Hangman {
 
     public boolean isGameOver() {
         return attemptsLeft > 0;
+    }
+
+    public Word getCurrentWord() {
+        return currentWord;
+    }
+
+    public int getAttemptsLeft() {
+        return attemptsLeft;
     }
 }
