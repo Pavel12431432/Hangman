@@ -1,29 +1,47 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Word {
-    private String word;
-    private List<Character> guessedLetters;
+    private final String word;
+    private final Set<Character> guessedLetters;
+    private final Set<Character> wordLetters;
 
     public Word(String newWord) {
         word = newWord;
-        guessedLetters = new ArrayList<>();
+        wordLetters = newWord.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toSet());
+        guessedLetters = new HashSet<>();
     }
 
-    // TODO: implement method revealLetter
     public void revealLetter(char letter) {
-
+        guessedLetters.add(letter);
     }
 
-    // TODO: implement method getFormattedLetter
-    public String getFormattedLetter() {
-        return null;
+    public String getMaskedWord() {
+        StringBuilder maskedString = new StringBuilder(word.length());
+        for (char c : word.toCharArray()) {
+            if (guessedLetters.contains(c)) {
+                maskedString.append(c);
+            } else {
+                maskedString.append('_');
+            }
+        }
+        return maskedString.toString();
     }
 
-    // TODO: implement method isWordGuessed
     public boolean isWordGuessed() {
-        return false;
+        return guessedLetters.containsAll(wordLetters);
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public Set<Character> getGuessedLetters() {
+        return guessedLetters;
     }
 }
