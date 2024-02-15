@@ -21,9 +21,12 @@ public class Hangman {
 
     }
 
-    // TODO: implement method inputChar
-    private char inputChar() {
-        return 'a';
+    public static char inputChar(String lineInput) {
+        if (lineInput.length() != 1)
+            throw new IllegalArgumentException("Input exactly 1 character");
+        if ('a' > lineInput.charAt(0) || 'z' < lineInput.charAt(0))
+            throw new IllegalArgumentException("Input a lowercase letter");
+        return lineInput.charAt(0);
     }
 
     public void setWord(String newWord) {
