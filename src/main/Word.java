@@ -44,4 +44,8 @@ public class Word {
     public Set<Character> getGuessedLetters() {
         return guessedLetters;
     }
+
+    public Set<Character> getWordLetters() {
+        return wordLetters;
+    }
 }
