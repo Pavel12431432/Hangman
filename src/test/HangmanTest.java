@@ -6,19 +6,31 @@ import org.junit.jupiter.api.*;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
+/**
+ * JUnit tests for the Hangman class.
+ */
 public class HangmanTest {
     private Hangman hangman;
+    /**
+     * Set up the Hangman object before each test.
+     */
     @BeforeEach
     public void setUp() {
         hangman = new Hangman("string");
     }
 
+    /**
+     * Test the Hangman constructor.
+     */
     @Test
     public void HangmanConstructorTest() {
         assert hangman.getCurrentWord().getWord().equals("string");
         assert hangman.getAttemptsLeft() == 10;
     }
 
+    /**
+     * Test the inputChar method of the Hangman class.
+     */
     @Test
     public void HangmanInputCharTest() {
         assert Hangman.inputChar("a") == 'a';
@@ -32,6 +44,9 @@ public class HangmanTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> Hangman.inputChar("1"));
     }
 
+    /**
+     * Test the getGameState method of the Hangman class.
+     */
     @Test
     public void HangmanGetGameStateTest() {
         assert hangman.getGameState().equals("______\t10 attempts left");
@@ -47,6 +62,9 @@ public class HangmanTest {
         assert hangman.getGameState().equals("_t_i__\t8 attempts left");
     }
 
+    /**
+     * Test the concludeGame method of the Hangman class.
+     */
     @Test
     public void HangmanConcludeGameTest() {
         assert hangman.concludeGame().equals("You win!");
@@ -80,6 +98,9 @@ public class HangmanTest {
         assert hangman.concludeGame().equals("You lose! The word was: string");
     }
 
+    /**
+     * Test the processGuess method of the Hangman class.
+     */
     @Test
     public void HangmanProcessGuessTest() {
         assert hangman.processGuess('z').equals("Incorrect guess.");
@@ -94,6 +115,9 @@ public class HangmanTest {
         assert hangman.getAttemptsLeft() == 7;
     }
 
+    /**
+     * Test the promptForLetter method of the Hangman class.
+     */
     @Test
     public void HangmanPromptForLetterTest() {
         String input = "a\n5\nk\nabc\nasd\n)\np";
@@ -105,6 +129,9 @@ public class HangmanTest {
         assert 'p' == hangman.promptForLetter(scanner);
     }
 
+    /**
+     * Test the playGame method of the Hangman class.
+     */
     @Test
     public void HangmanPlayGameTest() {
         String input = "s\nt\nr\np\ni\nn\ng\n";
@@ -118,6 +145,9 @@ public class HangmanTest {
         assert hangman.concludeGame().equals("You win!");
     }
 
+    /**
+     * Reset System.in after all tests have been executed.
+     */
     @AfterAll
     public static void resetSystemIn() {
         System.setIn(System.in);
