@@ -23,7 +23,7 @@ public class HangmanTest {
      * Test the Hangman constructor.
      */
     @Test
-    public void HangmanConstructorTest() {
+    public void hangmanConstructorTest() {
         assert hangman.getCurrentWord().getWord().equals("string");
         assert hangman.getAttemptsLeft() == 10;
     }
@@ -32,7 +32,7 @@ public class HangmanTest {
      * Test the inputChar method of the Hangman class.
      */
     @Test
-    public void HangmanInputCharTest() {
+    public void hangmanInputCharTest() {
         assert Hangman.inputChar("a") == 'a';
         assert Hangman.inputChar("z") == 'z';
         // check if these raise exceptions
@@ -48,7 +48,7 @@ public class HangmanTest {
      * Test the getGameState method of the Hangman class.
      */
     @Test
-    public void HangmanGetGameStateTest() {
+    public void hangmanGetGameStateTest() {
         assert hangman.getGameState().equals("______\t10 attempts left");
         hangman.processGuess('t');
         assert hangman.getGameState().equals("_t____\t10 attempts left");
@@ -66,7 +66,7 @@ public class HangmanTest {
      * Test the concludeGame method of the Hangman class.
      */
     @Test
-    public void HangmanConcludeGameTest() {
+    public void hangmanConcludeGameTest() {
         assert hangman.concludeGame().equals("You win!");
         hangman.processGuess('s');
         assert hangman.concludeGame().equals("You win!");
@@ -102,7 +102,7 @@ public class HangmanTest {
      * Test the processGuess method of the Hangman class.
      */
     @Test
-    public void HangmanProcessGuessTest() {
+    public void hangmanProcessGuessTest() {
         assert hangman.processGuess('z').equals("Incorrect guess.");
         assert hangman.getAttemptsLeft() == 9;
         assert hangman.processGuess('r').equals("Good guess!");
@@ -119,7 +119,7 @@ public class HangmanTest {
      * Test the promptForLetter method of the Hangman class.
      */
     @Test
-    public void HangmanPromptForLetterTest() {
+    public void hangmanPromptForLetterTest() {
         String input = "a\n5\nk\nabc\nasd\n)\np";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);
@@ -133,7 +133,7 @@ public class HangmanTest {
      * Test the playGame method of the Hangman class.
      */
     @Test
-    public void HangmanPlayGameTest() {
+    public void hangmanPlayGameTest() {
         String input = "s\nt\nr\np\ni\nn\ng\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);

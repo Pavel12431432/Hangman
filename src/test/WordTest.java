@@ -13,7 +13,7 @@ public class WordTest {
      * Test case for the Word class constructor.
      */
     @Test
-    public void WordConstructorTest() {
+    public void wordConstructorTest() {
         Word word = new Word("string");
         assert word.getWord().equals("string");
         assert word.getGuessedLetters().isEmpty();
@@ -23,7 +23,7 @@ public class WordTest {
      * Test case for the revealLetter method in the Word class.
      */
     @Test
-    public void WordRevealLetterTest() {
+    public void wordRevealLetterTest() {
         Word word = new Word("string");
         word.revealLetter('a');
         assert word.getGuessedLetters().equals(Set.of('a'));
@@ -37,7 +37,7 @@ public class WordTest {
      * Test case for the isWordGuessed method in the Word class.
      */
     @Test
-    public void WordIsWordGuessedTest() {
+    public void wordIsWordGuessedTest() {
         Word word = new Word("string");
         assert !word.isWordGuessed();
         word.revealLetter('a');
@@ -59,7 +59,7 @@ public class WordTest {
      * Test case for the getMaskedWord method in the Word class.
      */
     @Test
-    public void WordGetMaskedLetterTest() {
+    public void wordGetMaskedLetterTest() {
         Word word = new Word("string");
         assert word.getMaskedWord().equals("______");
         word.revealLetter('a');
