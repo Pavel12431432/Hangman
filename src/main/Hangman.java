@@ -9,6 +9,14 @@ public class Hangman {
     private Word currentWord;
     private int attemptsLeft = 10;
 
+    private static final String attemptsLeftText = " attempts left";
+    private static final String loseText = "You lose! The word was: ";
+    private static final String winText = "You win!";
+    private static final String incorrectGuessText = "Incorrect guess.";
+    private static final String correctGuessText = "Good guess!";
+    private static final String alreadyGuessedLetterText = "Letter is already guessed.";
+    private static final String inputOneLetterText = "Input exactly 1 character";
+    private static final String inputLowercaseLetterText = "Input a lowercase letter";
     /**
      * Constructs a Hangman game with the specified word.
      *
@@ -24,7 +32,7 @@ public class Hangman {
      * @return The current game state as a formatted string.
      */
     public String getGameState() {
-        return currentWord.getMaskedWord() + "\t" + attemptsLeft + " attempts left";
+        return String.join("", currentWord.getMaskedWord(), "\t", Integer.toString(attemptsLeft), attemptsLeftText);
     }
 
     /**
@@ -34,9 +42,9 @@ public class Hangman {
      */
     public String concludeGame() {
         if (isGameOver()) {
-            return "You lose! The word was: " + currentWord.getWord();
+            return loseText + currentWord.getWord();
         } else {
-            return "You win!";
+            return winText;
         }
     }
 
@@ -49,10 +57,10 @@ public class Hangman {
     public String processGuess(char guessedLetter) {
         if (!currentWord.getWordLetters().contains(guessedLetter)) {
             attemptsLeft--;
-            return "Incorrect guess.";
+            return incorrectGuessText;
         }
         currentWord.revealLetter(guessedLetter);
-        return "Good guess!";
+        return correctGuessText;
     }
 
     /**
@@ -67,7 +75,7 @@ public class Hangman {
             try {
                 guessedLetter = inputChar(sc.nextLine());
                 if (currentWord.getGuessedLetters().contains(guessedLetter)) {
-                    System.out.println("Letter is already guessed.");
+                    System.out.println(alreadyGuessedLetterText);
                 } else {
                     return guessedLetter;
                 }
@@ -101,9 +109,9 @@ public class Hangman {
      */
     public static char inputChar(String lineInput) {
         if (lineInput.length() != 1)
-            throw new IllegalArgumentException("Input exactly 1 character");
+            throw new IllegalArgumentException(inputOneLetterText);
         if ('a' > lineInput.charAt(0) || 'z' < lineInput.charAt(0))
-            throw new IllegalArgumentException("Input a lowercase letter");
+            throw new IllegalArgumentException(inputLowercaseLetterText);
         return lineInput.charAt(0);
     }
 
