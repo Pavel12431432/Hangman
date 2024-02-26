@@ -1,6 +1,7 @@
 package main;
 
 import main.input.ConsoleInput;
+import main.input.FileInput;
 import main.input.InputReader;
 
 /**
@@ -11,7 +12,7 @@ public class Main {
      * The entry point for the Hangman game.
      */
     public static void main(String[] args) {
-        InputReader input = new ConsoleInput();
+        InputReader input = new FileInput("src/main/input/input.txt");
         Hangman hangmanGame = new Hangman("accident");
 
         hangmanGame.playGame(input);

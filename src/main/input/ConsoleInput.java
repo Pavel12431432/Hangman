@@ -18,6 +18,7 @@ public class ConsoleInput implements InputReader{
 
     /**
      * Reads the next line from the console.
+     * @return line, read from the console.
      */
     public String readLine() {
         try {

@@ -1,4 +1,4 @@
-package test;
+package test.input;
 
 import main.input.ConsoleInput;
 import main.input.InputReader;
