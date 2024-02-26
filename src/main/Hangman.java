@@ -1,5 +1,6 @@
 package main;
 
+import main.output.Output;
 import main.input.InputReader;
 
 /**
@@ -69,18 +70,18 @@ public class Hangman {
      * @param input The InputReader object for input.
      * @return The guessed letter provided by the user.
      */
-    public char promptForLetter(InputReader input) {
+    public char promptForLetter(InputReader input, Output out) {
         char guessedLetter;
         while (true) {
             try {
                 guessedLetter = inputChar(input.readLine());
                 if (currentWord.getGuessedLetters().contains(guessedLetter)) {
-                    System.out.println(alreadyGuessedLetterText);
+                    out.outputLine(alreadyGuessedLetterText);
                 } else {
                     return guessedLetter;
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                out.outputLine(e.getMessage());
             }
         }
     }
@@ -90,14 +91,14 @@ public class Hangman {
      *
      * @param input The InputReader object for input.
      */
-    public void playGame(InputReader input) {
+    public void playGame(InputReader input, Output out) {
         System.out.println(getGameState());
         while (!currentWord.isWordGuessed() && !this.isGameOver()) {
-            char guessedChar = promptForLetter(input);
+            char guessedChar = promptForLetter(input, out);
             System.out.println(processGuess(guessedChar));
             System.out.println(getGameState());
         }
-        System.out.println(concludeGame());
+        out.outputLine(concludeGame());
     }
 
     /**
