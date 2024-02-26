@@ -1,5 +1,8 @@
 package main;
 
+import main.output.Output;
+import main.output.OutputConsole;
+
 import java.util.Scanner;
 
 /**
@@ -10,9 +13,11 @@ public class Main {
      * The entry point for the Hangman game.
      */
     public static void main(String[] args) {
+        Output out = new OutputConsole();
         Scanner sc = new Scanner(System.in);
         Hangman hangmanGame = new Hangman("accident");
 
-        hangmanGame.playGame(sc);
+
+        hangmanGame.playGame(sc, out);
     }
 }

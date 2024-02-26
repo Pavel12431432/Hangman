@@ -1,6 +1,8 @@
 package test;
 
 import main.Hangman;
+import main.output.Output;
+import main.output.OutputConsole;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayInputStream;
@@ -123,10 +125,11 @@ public class HangmanTest {
         String input = "a\n5\nk\nabc\nasd\n)\np";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);
+        Output o = new OutputConsole();
 
-        assert 'a' == hangman.promptForLetter(scanner);
-        assert 'k' == hangman.promptForLetter(scanner);
-        assert 'p' == hangman.promptForLetter(scanner);
+        assert 'a' == hangman.promptForLetter(scanner, o);
+        assert 'k' == hangman.promptForLetter(scanner, o);
+        assert 'p' == hangman.promptForLetter(scanner, o);
     }
 
     /**
@@ -137,8 +140,9 @@ public class HangmanTest {
         String input = "s\nt\nr\np\ni\nn\ng\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Scanner scanner = new Scanner(System.in);
+        Output o = new OutputConsole();
 
-        hangman.playGame(scanner);
+        hangman.playGame(scanner, o);
         assert hangman.getAttemptsLeft() == 9;
         assert !hangman.isGameOver();
         assert hangman.getCurrentWord().getMaskedWord().equals("string");
