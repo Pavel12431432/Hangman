@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 /**
- * A set of JUnit tests for the Word class in the Hangman game.
+ * JUnit tests for the {@link Word} class.
  */
 public class WordTest {
     /**
-     * Test case for the Word class constructor.
+     * Test the {@link Word#Word(String)} constructor.
      */
     @Test
     public void wordConstructorTest() {
@@ -20,7 +20,7 @@ public class WordTest {
     }
 
     /**
-     * Test case for the revealLetter method in the Word class.
+     * Test the {@link Word#revealLetter(char)} method in the {@link Word} class.
      */
     @Test
     public void wordRevealLetterTest() {
@@ -34,7 +34,7 @@ public class WordTest {
     }
 
     /**
-     * Test case for the isWordGuessed method in the Word class.
+     * Test the {@link Word#isWordGuessed()} method in the {@link Word} class.
      */
     @Test
     public void wordIsWordGuessedTest() {
@@ -56,7 +56,7 @@ public class WordTest {
     }
 
     /**
-     * Test case for the getMaskedWord method in the Word class.
+     * Test the {@link Word#getMaskedWord()} method in the {@link Word} class.
      */
     @Test
     public void wordGetMaskedLetterTest() {

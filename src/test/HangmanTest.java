@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
 /**
- * JUnit tests for the Hangman class.
+ * JUnit tests for the {@link Hangman} class.
  */
 public class HangmanTest {
     private Hangman hangman;
@@ -20,7 +20,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the Hangman constructor.
+     * Test the {@link Hangman#Hangman(String)} constructor.
      */
     @Test
     public void hangmanConstructorTest() {
@@ -29,7 +29,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the inputChar method of the Hangman class.
+     * Test the {@link Hangman#inputChar(String)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanInputCharTest() {
@@ -45,7 +45,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the getGameState method of the Hangman class.
+     * Test the {@link Hangman#getGameState()} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanGetGameStateTest() {
@@ -63,7 +63,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the concludeGame method of the Hangman class.
+     * Test the {@link Hangman#concludeGame()} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanConcludeGameTest() {
@@ -99,7 +99,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the processGuess method of the Hangman class.
+     * Test the {@link Hangman#processGuess(char)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanProcessGuessTest() {
@@ -116,7 +116,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the promptForLetter method of the Hangman class.
+     * Test the {@link Hangman#promptForLetter(Scanner)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanPromptForLetterTest() {
@@ -130,7 +130,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the playGame method of the Hangman class.
+     * Test the {@link Hangman#playGame(Scanner)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanPlayGameTest() {
