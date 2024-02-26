@@ -1,10 +1,11 @@
 package test;
 
+import main.input.ConsoleInput;
 import main.Hangman;
+import main.input.InputReader;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayInputStream;
-import java.util.Scanner;
 
 /**
  * JUnit tests for the {@link Hangman} class.
@@ -122,11 +123,11 @@ public class HangmanTest {
     public void hangmanPromptForLetterTest() {
         String input = "a\n5\nk\nabc\nasd\n)\np";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Scanner scanner = new Scanner(System.in);
+        InputReader inputTest = new ConsoleInput();
 
-        assert 'a' == hangman.promptForLetter(scanner);
-        assert 'k' == hangman.promptForLetter(scanner);
-        assert 'p' == hangman.promptForLetter(scanner);
+        assert 'a' == hangman.promptForLetter(inputTest);
+        assert 'k' == hangman.promptForLetter(inputTest);
+        assert 'p' == hangman.promptForLetter(inputTest);
     }
 
     /**
@@ -136,9 +137,9 @@ public class HangmanTest {
     public void hangmanPlayGameTest() {
         String input = "s\nt\nr\np\ni\nn\ng\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Scanner scanner = new Scanner(System.in);
+        InputReader inputTest = new ConsoleInput();
 
-        hangman.playGame(scanner);
+        hangman.playGame(inputTest);
         assert hangman.getAttemptsLeft() == 9;
         assert !hangman.isGameOver();
         assert hangman.getCurrentWord().getMaskedWord().equals("string");
