@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Scanner;
+import main.input.InputReader;
 
 /**
  * The Hangman class represents a Hangman game.
@@ -66,14 +66,14 @@ public class Hangman {
     /**
      * Prompts the user for a letter input.
      *
-     * @param sc The Scanner object for input.
+     * @param input The InputReader object for input.
      * @return The guessed letter provided by the user.
      */
-    public char promptForLetter(Scanner sc) {
+    public char promptForLetter(InputReader input) {
         char guessedLetter;
         while (true) {
             try {
-                guessedLetter = inputChar(sc.nextLine());
+                guessedLetter = inputChar(input.readLine());
                 if (currentWord.getGuessedLetters().contains(guessedLetter)) {
                     System.out.println(alreadyGuessedLetterText);
                 } else {
@@ -88,12 +88,12 @@ public class Hangman {
     /**
      * Plays the Hangman game until the word is guessed or the player runs out of attempts.
      *
-     * @param sc The Scanner object for input.
+     * @param input The InputReader object for input.
      */
-    public void playGame(Scanner sc) {
+    public void playGame(InputReader input) {
         System.out.println(getGameState());
         while (!currentWord.isWordGuessed() && !this.isGameOver()) {
-            char guessedChar = promptForLetter(sc);
+            char guessedChar = promptForLetter(input);
             System.out.println(processGuess(guessedChar));
             System.out.println(getGameState());
         }
