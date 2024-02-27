@@ -1,6 +1,5 @@
 package main;
 
-import main.input.ConsoleInput;
 import main.input.FileInput;
 import main.input.InputReader;
 import main.output.Output;

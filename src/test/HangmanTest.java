@@ -119,7 +119,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the {@link Hangman#promptForLetter(Scanner)} method of the {@link Hangman} class.
+     * Test the {@link Hangman#promptForLetter(InputReader, Output)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanPromptForLetterTest() {
@@ -134,7 +134,7 @@ public class HangmanTest {
     }
 
     /**
-     * Test the {@link Hangman#playGame(Scanner)} method of the {@link Hangman} class.
+     * Test the {@link Hangman#playGame(InputReader, Output)} method of the {@link Hangman} class.
      */
     @Test
     public void hangmanPlayGameTest() {
