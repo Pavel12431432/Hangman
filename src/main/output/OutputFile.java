@@ -3,6 +3,8 @@ package main.output;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * The {@code OutputFile} class implements the {@code Output} interface to write output lines to a specified file.
@@ -18,6 +20,11 @@ public class OutputFile implements Output {
      *                 and output lines will be appended if the file already exists.
      */
     public OutputFile(String filePath) {
+        try {
+            Files.deleteIfExists(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.filePath = filePath;
     }
 

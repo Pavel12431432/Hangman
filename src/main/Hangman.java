@@ -92,11 +92,11 @@ public class Hangman {
      * @param input The InputReader object for input.
      */
     public void playGame(InputReader input, Output out) {
-        System.out.println(getGameState());
+        out.outputLine(getGameState());
         while (!currentWord.isWordGuessed() && !this.isGameOver()) {
             char guessedChar = promptForLetter(input, out);
-            System.out.println(processGuess(guessedChar));
-            System.out.println(getGameState());
+            out.outputLine(processGuess(guessedChar));
+            out.outputLine(getGameState());
         }
         out.outputLine(concludeGame());
     }

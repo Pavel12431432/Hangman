@@ -2,6 +2,7 @@ package test.input;
 
 import main.input.ConsoleInput;
 import main.input.InputReader;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -26,5 +27,13 @@ public class ConsoleInputTest {
         assert "ass  sd".equals(inputTest.readLine());
         assert ")".equals(inputTest.readLine());
         assert "p".equals(inputTest.readLine());
+    }
+
+    /**
+     * Reset System.in after all tests have been executed.
+     */
+    @AfterAll
+    public static void resetSystemIn() {
+        System.setIn(System.in);
     }
 }
