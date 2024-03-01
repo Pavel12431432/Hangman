@@ -1,8 +1,7 @@
-package test.output;
+package output;
 
-import main.output.Output;
-import main.output.OutputFile;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OutputFileTest {
 
@@ -50,11 +46,11 @@ public class OutputFileTest {
         outputFile.outputLine(testLine);
 
         // Then
-        assertTrue(Files.exists(tempFile), "File should exist");
+        Assertions.assertTrue(Files.exists(tempFile), "File should exist");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(tempFile.toFile()))) {
             String line = reader.readLine();
-            assertEquals(testLine, line, "The written line should match the input line");
+            Assertions.assertEquals(testLine, line, "The written line should match the input line");
         }
     }
 }

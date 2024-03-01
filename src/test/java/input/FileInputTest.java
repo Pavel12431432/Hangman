@@ -1,7 +1,5 @@
-package test.input;
+package input;
 
-import main.input.FileInput;
-import main.input.InputReader;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,7 +11,7 @@ public class FileInputTest {
      */
     @Test
     public void readLineTest() {
-        InputReader inputTest = new FileInput("src/test/input/testInput.txt");
+        InputReader inputTest = new FileInput("src/test/java/input/testInput.txt");
         assert "abc".equals(inputTest.readLine());
         assert "asd f sfgdfg".equals(inputTest.readLine());
         assert "".equals(inputTest.readLine());

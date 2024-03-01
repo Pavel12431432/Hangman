@@ -1,13 +1,11 @@
-package test.output;
+package output;
 
-import main.output.Output;
-import main.output.OutputConsole;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 
@@ -42,6 +40,6 @@ public class OutputConsoleTest {
         console.outputLine(testString);
 
         // Check that the correct output was printed to the console
-        assertEquals(testString + System.lineSeparator(), outContent.toString());
+        Assertions.assertEquals(testString + System.lineSeparator(), outContent.toString());
     }
 }

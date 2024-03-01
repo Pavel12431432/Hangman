@@ -1,7 +1,5 @@
-package test.input;
+package input;
 
-import main.input.ConsoleInput;
-import main.input.InputReader;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 

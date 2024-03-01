@@ -1,4 +1,4 @@
-package main.input;
+package input;
 
 /**
  * Interface class that is used to read input

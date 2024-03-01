@@ -1,11 +1,11 @@
-package test;
-
-import main.input.ConsoleInput;
-import main.Hangman;
-import main.output.Output;
-import main.output.OutputConsole;
-import main.input.InputReader;
-import org.junit.jupiter.api.*;
+import input.ConsoleInput;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import output.Output;
+import output.OutputConsole;
+import input.InputReader;
 
 import java.io.ByteArrayInputStream;
 

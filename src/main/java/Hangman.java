@@ -1,7 +1,5 @@
-package main;
-
-import main.output.Output;
-import main.input.InputReader;
+import output.Output;
+import input.InputReader;
 
 /**
  * The Hangman class represents a Hangman game.

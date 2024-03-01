@@ -1,4 +1,4 @@
-package main.output;
+package output;
 
 /**
  * The {@code OutputFile} class implements the {@code Output} interface to write output lines to a specified file.
