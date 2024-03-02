@@ -6,7 +6,7 @@ import input.InputReader;
  */
 public class Hangman {
     private Word currentWord;
-    private int attemptsLeft = 10;
+    private int attemptsLeft;
 
     private static final String attemptsLeftText = " attempts left";
     private static final String loseText = "You lose! The word was: ";
@@ -20,9 +20,11 @@ public class Hangman {
      * Constructs a Hangman game with the specified word.
      *
      * @param newWord The word for the Hangman game.
+     * @param totalAttempts Total number of attempts to guess word.
      */
-    public Hangman(String newWord) {
+    public Hangman(String newWord, int totalAttempts) {
         setWord(newWord);
+        attemptsLeft = totalAttempts;
     }
 
     /**

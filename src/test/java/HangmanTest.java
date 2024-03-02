@@ -19,11 +19,11 @@ public class HangmanTest {
      */
     @BeforeEach
     public void setUp() {
-        hangman = new Hangman("string");
+        hangman = new Hangman("string", 10);
     }
 
     /**
-     * Test the {@link Hangman#Hangman(String)} constructor.
+     * Test the {@link Hangman#Hangman(String, int)} constructor.
      */
     @Test
     public void hangmanConstructorTest() {

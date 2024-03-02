@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         InputReader input = new ConsoleInput();
         Output out = new OutputConsole();
-        Hangman hangmanGame = new Hangman(input.readLine());
+        Hangman hangmanGame = new Hangman(input.readLine(), 10);
 
         hangmanGame.playGame(input, out);
     }
