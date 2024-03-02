@@ -1,56 +1,81 @@
 package output;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for {@link OutputFile}.
+ */
 public class OutputFileTest {
 
-    private Path tempFile;
+    @TempDir
+    File tempDir;
+
+    private OutputFile outputFile;
+    private Path testFilePath;
 
     /**
-     * Sets up a temporary file for test.
+     * Sets up the test environment before each test. Initializes {@link OutputFile} with a test file path.
      */
     @BeforeEach
-    public void setUp() throws IOException {
-        // Create a temporary file which will be used for testing
-        tempFile = Files.createTempFile("testOutputFile", ".txt");
+    public void setUp() {
+        testFilePath = new File(tempDir, "testFile.txt").toPath();
+        outputFile = new OutputFile(testFilePath.toString());
     }
 
     /**
-     * Cleans up by deleting the temporary file.
-     */
-    @AfterEach
-    public void tearDown() throws IOException {
-        // Delete the temporary file after each test
-        Files.deleteIfExists(tempFile);
-    }
-
-    /**
-     * Verifies output line is written to file correctly.
+     * Tests that when the specified file does not exist, the {@link OutputFile#outputLine(String)} method creates it
+     * and writes the provided line to the new file.
+     * @throws IOException if an I/O error occurs when opening the file for reading its contents
      */
     @Test
-    public void testOutputLine() throws IOException {
-        // Given
-        Output outputFile = new OutputFile(tempFile.toString());
-        String testLine = "Test line for OutputFile";
-
-        // When
+    public void testOutputLineCreatesFileIfNotExist() throws IOException {
+        String testLine = "Test line";
         outputFile.outputLine(testLine);
 
-        // Then
-        Assertions.assertTrue(Files.exists(tempFile), "File should exist");
+        assertTrue(Files.exists(testFilePath), "File should be created");
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(tempFile.toFile()))) {
-            String line = reader.readLine();
-            Assertions.assertEquals(testLine, line, "The written line should match the input line");
+        try (BufferedReader reader = Files.newBufferedReader(testFilePath)) {
+            assertEquals(testLine, reader.readLine(), "The written line should match the input");
         }
+    }
+
+    /**
+     * Tests that when the specified file exists, the {@link OutputFile#outputLine(String)} method appends the provided
+     * line to the existing file without overwriting its content.
+     * @throws IOException if an I/O error occurs when opening the file for reading its contents
+     */
+    @Test
+    public void testOutputLineAppendsToFileIfExist() throws IOException {
+        Files.write(testFilePath, "Initial line\n".getBytes());
+
+        String testLine = "Test line";
+        outputFile.outputLine(testLine);
+
+        try (BufferedReader reader = Files.newBufferedReader(testFilePath)) {
+            reader.readLine(); // Skip the initial line
+            assertEquals(testLine, reader.readLine(), "The second line should be the appended line");
+        }
+    }
+
+    /**
+     * Tests that the {@link OutputFile#outputLine(String)} method throws a RuntimeException when an IOException occurs
+     * during the file writing process. This test simulates a scenario where the file is not writable by attempting
+     * to write to a directory path instead of a file.
+     */
+    @Test
+    public void testOutputLineThrowsExceptionOnIOException() {
+        outputFile = new OutputFile(tempDir.toString()); // Using a directory path to induce an IOException
+
+        assertThrows(RuntimeException.class, () -> outputFile.outputLine("Test line"),
+                "Writing to a directory should throw a RuntimeException");
     }
 }
