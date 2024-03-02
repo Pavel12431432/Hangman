@@ -1,45 +1,43 @@
 package output;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.verify;
 
-
-
+/**
+ * Tests for the {@link OutputConsole} class.
+ */
 public class OutputConsoleTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+    @Mock
+    private Logger mockLogger;
+
+    private OutputConsole outputConsole;
 
     /**
-     * Redirects System.out to capture console output.
+     * Sets up the test environment before each test.
+     * This method initializes the mocks and creates a new instance of {@link OutputConsole}
+     * with a mocked {@link Logger}.
      */
     @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        outputConsole = new OutputConsole();
+        OutputConsole.logger = mockLogger; // Inject mock logger into OutputConsole class
     }
 
     /**
-     * Restores System.out to its original state.
-     */
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-    }
-
-    /**
-     * Tests if the console output matches expected string.
+     * Tests that a single line of text is correctly passed to the logger.
+     * This test verifies that when {@link OutputConsole#outputLine(String)} is called,
+     * the logger's {@code info} method is invoked with the same string.
      */
     @Test
-    public void testOutputLine() {
-        Output console = new OutputConsole();
-        String testString = "Hello, JUnit!";
-        console.outputLine(testString);
-
-        // Check that the correct output was printed to the console
-        Assertions.assertEquals(testString + System.lineSeparator(), outContent.toString());
+    public void testOutputLineCallsLoggerWithCorrectLine() {
+        String testLine = "Test line";
+        outputConsole.outputLine(testLine);
+        verify(mockLogger).info(testLine); // Verify logger.info was called with "Test line"
     }
 }

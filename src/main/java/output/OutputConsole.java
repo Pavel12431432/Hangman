@@ -1,11 +1,15 @@
 package output;
 
+import com.sun.tools.javac.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * The {@code OutputConsole} class implements the {@code Output} interface to write output lines to the console.
  * This class provides a simple way to output text to the standard output stream, typically a terminal or command prompt.
  */
 public class OutputConsole implements Output {
-
+    static Logger logger = LogManager.getLogger(Main.class);
     /**
      * Writes a single line of output to the console. This method simply prints the provided line of text to
      * the standard output stream using {@code System.out.println}.
@@ -15,6 +19,6 @@ public class OutputConsole implements Output {
      */
     @Override
     public void outputLine(String line) {
-        System.out.println(line);
+        logger.info(line);
     }
 }
