@@ -20,7 +20,7 @@ public class WordTest {
      * Test the {@link Word#revealLetter(char)} method in the {@link Word} class.
      */
     @Test
-    public void wordRevealLetterTest() {
+    public void givenWord_whenLettersRevealed_thenGuessedLettersSetMatchesExpected() {
         Word word = new Word("string");
         word.revealLetter('a');
         assert word.getGuessedLetters().equals(Set.of('a'));
@@ -31,10 +31,24 @@ public class WordTest {
     }
 
     /**
+     * Test the {@link Word#revealLetter(char)} method in the {@link Word} class.
+     */
+    @Test
+    public void givenWord_whenCorrectLettersRevealed_thenCorrectLettersAddedToGuessedSet() {
+        Word word = new Word("string");
+        word.revealLetter('s');
+        assert word.getGuessedLetters().equals(Set.of('s'));
+        word.revealLetter('t');
+        assert word.getGuessedLetters().equals(Set.of('s', 't'));
+        word.revealLetter('g');
+        assert word.getGuessedLetters().equals(Set.of('s', 't', 'g'));
+    }
+
+    /**
      * Test the {@link Word#isWordGuessed()} method in the {@link Word} class.
      */
     @Test
-    public void wordIsWordGuessedTest() {
+    public void givenIncompleteWord_whenLettersRevealed_thenWordIsGuessedCorrectly() {
         Word word = new Word("string");
         assert !word.isWordGuessed();
         word.revealLetter('a');
@@ -53,10 +67,21 @@ public class WordTest {
     }
 
     /**
+     * Test the {@link Word#isWordGuessed()} method in the {@link Word} class.
+     */
+    @Test
+    public void givenIncompleteWord_whenSomeLettersNotRevealed_thenWordIsNotGuessed() {
+        Word word = new Word("example");
+        word.revealLetter('e');
+        word.revealLetter('x');
+        assert !word.isWordGuessed();
+    }
+
+    /**
      * Test the {@link Word#getMaskedWord()} method in the {@link Word} class.
      */
     @Test
-    public void wordGetMaskedLetterTest() {
+    public void givenWord_whenRevealingLetters_thenMaskedWordUpdatesAccordingly() {
         Word word = new Word("string");
         assert word.getMaskedWord().equals("______");
         word.revealLetter('a');
@@ -77,5 +102,19 @@ public class WordTest {
         assert word.getMaskedWord().equals("string");
         word.revealLetter('q');
         assert word.getMaskedWord().equals("string");
+    }
+
+    /**
+     * Test the {@link Word#getMaskedWord()} method in the {@link Word} class.
+     */
+    @Test
+    public void givenWord_whenGuessingAbsentLetters_thenMaskedWordRemainsUnchanged() {
+        Word word = new Word("example");
+        word.revealLetter('z');
+        word.revealLetter('q');
+        word.revealLetter('y');
+        word.revealLetter('a');
+        word.revealLetter('p');
+        assert word.getMaskedWord().equals("_______");
     }
 }
