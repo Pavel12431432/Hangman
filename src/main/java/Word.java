@@ -40,7 +40,9 @@ public class Word {
     public String getMaskedWord() {
         StringBuilder maskedString = new StringBuilder(word.length());
         for (char c : word.toCharArray()) {
-            if (guessedLetters.contains(c)) {
+            char currentCharacterToUpper = Character.toUpperCase(c);
+            char currentCharacterToLower = Character.toLowerCase(c);
+            if (guessedLetters.contains(currentCharacterToLower) || guessedLetters.contains(currentCharacterToUpper)) {
                 maskedString.append(c);
             } else {
                 maskedString.append('_');
@@ -55,7 +57,14 @@ public class Word {
      * @return true if the word is completely guessed, false otherwise.
      */
     public boolean isWordGuessed() {
-        return guessedLetters.containsAll(wordLetters);
+        for (char c : word.toCharArray()) {
+            char upperCaseCharacter = Character.toUpperCase(c);
+            char lowerCaseCharacter = Character.toLowerCase(c);
+            if(!(guessedLetters.contains(upperCaseCharacter) || guessedLetters.contains(lowerCaseCharacter))){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

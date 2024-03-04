@@ -15,7 +15,7 @@ public class Hangman {
     private static final String correctGuessText = "Good guess!";
     private static final String alreadyGuessedLetterText = "Letter is already guessed.";
     private static final String inputOneLetterText = "Input exactly 1 character";
-    private static final String inputLowercaseLetterText = "Input a lowercase letter";
+    private static final String inputLetterText = "Input only letters";
     /**
      * Constructs a Hangman game with the specified word.
      *
@@ -56,7 +56,9 @@ public class Hangman {
      * @return A message indicating whether the guess was correct or incorrect.
      */
     public String processGuess(char guessedLetter) {
-        if (!currentWord.getWordLetters().contains(guessedLetter)) {
+        char guessedLetterToUpper = Character.toUpperCase(guessedLetter);
+        char guessedLetterToLower = Character.toLowerCase(guessedLetter);
+        if (!currentWord.getWordLetters().contains(guessedLetterToUpper) && !currentWord.getWordLetters().contains(guessedLetterToLower)) {
             attemptsLeft--;
             return incorrectGuessText;
         }
@@ -75,7 +77,9 @@ public class Hangman {
         while (true) {
             try {
                 guessedLetter = inputChar(input.readLine());
-                if (currentWord.getGuessedLetters().contains(guessedLetter)) {
+                char guessedLetterToUpper = Character.toUpperCase(guessedLetter);
+                char guessedLetterToLower = Character.toLowerCase(guessedLetter);
+                if (currentWord.getGuessedLetters().contains(guessedLetterToUpper) || currentWord.getGuessedLetters().contains(guessedLetterToLower)) {
                     out.outputLine(alreadyGuessedLetterText);
                 } else {
                     return guessedLetter;
@@ -102,17 +106,52 @@ public class Hangman {
     }
 
     /**
-     * Converts a string input to a character and performs validation.
+     * Checks if a given string contains only lowercase letters.
+     * <p>
+     * This method uses a regular expression to determine if the input string consists exclusively of lowercase letters from 'a' to 'z'. The input is considered valid if it contains one or more lowercase letters and nothing else.
+     * </p>
      *
-     * @param lineInput The input string to convert to a character.
-     * @return The converted character.
-     * @throws IllegalArgumentException If the input is not a single lowercase letter.
+     * @param input The string to be checked.
+     * @return {@code true} if the input string contains only lowercase letters; {@code false} otherwise.
+     */
+    public static boolean containsOnlyLetters(String input) {
+        // Define the regex pattern for a string of only lowercase letters
+        String pattern = "^[A-Za-z]+$";
+
+        // Check if the input matches the pattern
+        return input.matches(pattern);
+    }
+
+    /**
+     * Checks if the input contains more than two symbols (non-alphanumeric characters).
+     *
+     * @param input the string to check
+     * @return true if the input contains more than two symbols, false otherwise
+     */
+    public static boolean containsOnlyOneSymbol(String input) {
+        // Define the regex pattern for identifying more than two non-alphanumeric characters
+        String pattern = "^[a-zA-Z0-9]$";
+
+        // Check if the input matches the pattern
+        return input.matches(pattern);
+    }
+    /**
+     * Extracts and returns the first character from a given string after validating that it contains exactly one lowercase letter.
+     * <p>
+     * This method first checks if the provided string contains only lowercase letters using the {@code containsOnlyLowercaseLetters} method. If the string contains any character other than a lowercase letter, an {@code IllegalArgumentException} is thrown with a specific message. It then checks if the string contains exactly one symbol using the {@code containsOnlyOneSymbol} method. If the string contains more than one symbol, another {@code IllegalArgumentException} is thrown with a different specific message. After passing these validations, the method returns the first character of the string.
+     * </p>
+     *
+     * @param lineInput The input string to be processed.
+     * @return The first character of the input string if it passes the validation checks.
+     * @throws IllegalArgumentException If the input string does not contain only lowercase letters or if it does not contain exactly one symbol.
      */
     public static char inputChar(String lineInput) {
-        if (lineInput.length() != 1)
+        if(!containsOnlyLetters(lineInput)){
+            throw new IllegalArgumentException(inputLetterText);
+        }
+        if(!containsOnlyOneSymbol(lineInput)){
             throw new IllegalArgumentException(inputOneLetterText);
-        if ('a' > lineInput.charAt(0) || 'z' < lineInput.charAt(0))
-            throw new IllegalArgumentException(inputLowercaseLetterText);
+        }
         return lineInput.charAt(0);
     }
 
